@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div id="app" class="app" v-cloak>
+            <div class="app__top" >
+                <h2 class="app__top-title" v-if="list.length!=0">Number of blogs: {{list.length}}</h2>
+                <h2 class="app__top-title" v-else>There are no blogs yet. Add the first one</h2>
+            </div>
+            <ul class="app__list">
+                <li class="app__list-item" v-for="(item, index) in list" :key="index">
+                    <div class="app__list-content">
+                        <h3 class="app__list-title">{{index+1}}. {{item.title}}</h3>
+                        <p class="app__list-text">{{item.text}}</p>                        
+                    </div>
+                    <button class="app__list-btn" @click="deleteItem(index)">Delete</button>
+                </li>
+            </ul>
+            
+            <div class="app__bottom">
+                <div class="app__bottom-left">
+                    <input 
+                    type="text" 
+                    class="app__bottom-input" 
+                    :placeholder="placeholderInput" 
+                    v-model="newItem.title" 
+                    @keypress.enter="addItem"
+                    >
+                    <textarea 
+                    class="app__bottom-textarea" 
+                    :placeholder="placeholderTextarea" 
+                    v-model="newItem.text" 
+                    @keypress.enter="addItem"
+                    ></textarea>   
+                </div>
+                <button class="app__bottom-btn" @click="addItem">Add</button>                
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
